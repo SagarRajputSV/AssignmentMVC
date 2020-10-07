@@ -7,6 +7,7 @@ namespace TaskRobo.Models
     {
         [Key]
         public int TaskId { get; set; }
+        [Required]
         public string TaskTitle { get; set; }
         public string TaskContent { get; set; }
         public string TaskStatus { get; set; }
@@ -15,6 +16,6 @@ namespace TaskRobo.Models
         public string EmailId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
     }
 }

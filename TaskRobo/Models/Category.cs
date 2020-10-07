@@ -8,6 +8,7 @@ namespace TaskRobo.Models
     {
         [Key]
         public int CategoryId { get; set; }
+        [Required]
         public string CategoryTitle { get; set; }
         [ForeignKey("EmailId")]
         public AppUser AppUser { get; set; }

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TaskRobo.Models.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of the Task</h2>
+
+@Html.ActionLink("Add Categories","Add","Categories",new { @class = "btn btn-primary"})
+
+<h6>The Categories created by user is as follows</h6>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model!= null)
+            {
+                foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(category.CategoryTitle.ToString(), "Index", "Tasks", new { emailId = category.EmailId, categoryid = category.CategoryId }, null)</td>
+                        <td>@Html.ActionLink("Delete", "Delete", "Categories", new { emailId = category.EmailId, title = category.CategoryTitle}, null)</td>
+                    </tr>
+                }
+            }
+
+        }
+
+
+    </tbody>
+</table>
+

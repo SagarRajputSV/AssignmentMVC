@@ -1,0 +1,31 @@
+﻿@model IEnumerable<TaskRobo.Models.UserTask>
+@{
+    ViewBag.Title = "Index";
+}
+
+@{ 
+    var emailid = ViewBag.EmailId;
+    var categoryid = ViewBag.CategoryId;
+}
+
+<h2>Index</h2>
+
+@Html.ActionLink("Add Task","Add","Tasks", new { emailid,categoryid},new { @class = "btn btn-primary"})
+@{
+    foreach (var item in Model)
+    {
+        <div class="form-group">
+           @Html.DisplayNameFor(u=> u.TaskId): <b>@item.TaskId </b>
+            <br />
+            @Html.DisplayNameFor(u=> u.TaskTitle): <b>@item.TaskTitle</b>
+            <br />
+            @Html.DisplayNameFor(u=> u.TaskContent):<b>@item.TaskContent</b>
+            <br />
+            @Html.DisplayNameFor(u=> u.TaskStatus):<b> @item.TaskStatus</b>
+            <br />
+            UserId:<b>@item.EmailId</b>
+            <br />
+            @Html.DisplayNameFor(u=> u.CategoryId):<b>@item.CategoryId</b>
+        </div>
+    }
+}

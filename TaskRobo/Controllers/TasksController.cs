@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -8,37 +10,72 @@ namespace TaskRobo.Controllers
 {
     public class TasksController : Controller
     {
-         /*
-            * Implement the below mentioned methods as per mentioned requiremetns.
-        */
-
+        /*
+           * Implement the below mentioned methods as per mentioned requiremetns.
+       */
+        public TaskDbContext contextobj = new TaskDbContext();
         // Index action method should return view along with all tasks based upon the logged in user
-        
+        public ActionResult Index(string emailId,int categoryid)
+        {
+            if(Session["User"]!=null)
+            {
+                List<UserTask> usertaskList = contextobj.UserTasks.ToList();
 
-        // Details action method should retrieve tasks data from database based upon the logged in user and id
-        // if success, return view with task details else return not found status
-       
+                if(usertaskList.Count>0)
+                {
+                    foreach (UserTask userTask in usertaskList)
+                    {
+                        if (userTask.EmailId != emailId && userTask.CategoryId != categoryid)
+                        {
+                            usertaskList.Remove(userTask);
+                        }
+                    }
+                }
+                ViewBag.EmailId = emailId;
+                ViewBag.CategoryId = categoryid;
+                return View(usertaskList);
 
-        // Create action method should get all categories from database based upon logged in user
-        // and return view
-       
+            }
+            else
+            {
+                return RedirectToAction("Index", "Categories");
+            }
+        }
 
-        // Create action method should handle post request and store task details in database. 
-        // If success redirect to index action method else return view with model
-       
+        [HttpGet]
+        public ActionResult Add(string emailid, string categoryid)
+        {
+            if(Session["User"]!=null)
+            {
+                ViewBag.UserInfo = Session["User"];
+                UserTask usertask = new UserTask();
+                usertask.EmailId = emailid;
+                usertask.CategoryId = Convert.ToInt32(categoryid);
+                return View(usertask);
+            }
 
-        // Edit action method should retrieve task details from database based upon logged in user and id
-        // If success return view along with task details else return not found status
-     
-        // Edit action should handle post request and modify the task details into database.
-        // If success redirect to index action method else return view with model.
-        
-        
-        // Delete action method should retrieve task details from database based upon logged in user and id
-        // If success return view with task details else return not found status
-    
-        // DeleteConfirmed action method should handle post request. Action name should be given as Delete using attribute.
-        // This method should delete task details from database based upon logged in user and id then return to index
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Add(UserTask usertask)
+        {
+
+            UserTask usertaskDb = new UserTask();
+            usertaskDb.TaskTitle = usertask.TaskTitle;
+            usertaskDb.TaskContent = usertask.TaskContent;
+            usertaskDb.TaskStatus = usertask.TaskStatus;
+            usertaskDb.EmailId = usertask.EmailId;
+            usertaskDb.CategoryId = usertask.CategoryId;
+
+            contextobj.UserTasks.Add(usertaskDb);
+            contextobj.SaveChanges();
+
+            return RedirectToAction("Index","Tasks",new { emailId =usertask.EmailId,categoryid = usertask.CategoryId});
+        }
               
     }
 }

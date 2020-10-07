@@ -1,0 +1,35 @@
+﻿@model TaskRobo.Models.Category
+@{
+    ViewBag.Title = "Add";
+}
+<link href="~/Content/site2.css" rel="stylesheet" />
+<h2>Add</h2>
+
+@{
+    Model.EmailId = ViewBag.UserInfo.EmailId;
+    if (ViewBag.Invalid != null)
+    {
+        <h6 style="color:red">@ViewBag.Invalid</h6>
+    }
+
+}
+
+<div class="AddForm">
+    @using (Html.BeginForm("Add", "Categories", FormMethod.Post, new { @id = "FormCategory" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(c => c.CategoryTitle)
+            @Html.TextBoxFor(c => c.CategoryTitle, new { @class = "form-control", @name = "CategoryTitle" })
+        </div>
+
+        @Html.HiddenFor(c => c.EmailId)
+
+        <button type="submit" class="btn btn-primary">Add Category</button>
+
+    }
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Custom.js"></script>
+}
+

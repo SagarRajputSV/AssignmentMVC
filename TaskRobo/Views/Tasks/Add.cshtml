@@ -1,0 +1,31 @@
+﻿@model TaskRobo.Models.UserTask
+@{
+    ViewBag.Title = "Add";
+}
+<link href="~/Content/site2.css" rel="stylesheet" />
+<h2>Add Task</h2>
+
+<div class="AddForm">
+    @using (Html.BeginForm("Add", "Tasks", FormMethod.Post, new { @id = "FormTitle" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(u => u.TaskTitle)
+            @Html.TextBoxFor(u => u.TaskTitle, new { @class = "form-control" })
+        </div>
+
+        <div>
+            @Html.LabelFor(u => u.TaskContent)
+            @Html.TextBoxFor(u => u.TaskContent, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(u => u.TaskStatus)
+            @Html.TextBoxFor(u => u.TaskStatus, new { @class = "form-control" })
+        </div>
+
+        @Html.HiddenFor(u=> u.CategoryId)
+        @Html.HiddenFor(u=> u.EmailId)
+        
+        <button type="submit" class="btn btn-primary">Add Title</button>
+    }
+</div>

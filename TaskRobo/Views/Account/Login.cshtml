@@ -1,23 +1,19 @@
 ﻿@model TaskRobo.Models.AppUser
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Login";
 }
-<link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+<h2>Login</h2>
 
-<h2 style="margin-left:500px">Register</h2>
-
-
-@{
-    if (ViewBag.Invalid!= null)
+@{ 
+    if(ViewBag.Invalid != null)
     {
         <h3>@ViewBag.Invalid</h3>
     }
-
 }
 
-
 <div class="main-register-form">
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @id = "FormRegister" }))
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @id = "FormLogin" }))
     {
         <div class="form-group">
             @Html.LabelFor(a => a.EmailId, new { @class = "col - sm - 2 col - form - label col - form - label - lg" })
@@ -28,18 +24,12 @@
             @Html.PasswordFor(a => a.Password, new { @class = "form-control col-7", @id = "Password", @name = "Password" })
         </div>
 
-        <div class="form-group">
-            @Html.Label("Confirm Password", new { @class = "col - sm - 2 col - form - label col - form - label - lg" })
-            @Html.Password("ConfirmPassword", null, new { @class = "form-control col-7", @id = "ConfirmPassword", @name = "ConfirmPassword" })
-        </div>
-
         <div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </div>
     }
 </div>
 
 @section scripts{
     <script src="~/Scripts/Custom.js"></script>
-}
-
+    }
