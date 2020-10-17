@@ -15,17 +15,19 @@
     foreach (var item in Model)
     {
         <div class="form-group">
-           @Html.DisplayNameFor(u=> u.TaskId): <b>@item.TaskId </b>
+           @Html.DisplayNameFor(u => u.TaskId): <b>@item.TaskId </b>
             <br />
-            @Html.DisplayNameFor(u=> u.TaskTitle): <b>@item.TaskTitle</b>
+            @Html.DisplayNameFor(u => u.TaskTitle): <b>@item.TaskTitle</b>
             <br />
-            @Html.DisplayNameFor(u=> u.TaskContent):<b>@item.TaskContent</b>
+            @Html.DisplayNameFor(u => u.TaskContent):<b>@item.TaskContent</b>
             <br />
-            @Html.DisplayNameFor(u=> u.TaskStatus):<b> @item.TaskStatus</b>
+            @Html.DisplayNameFor(u => u.TaskStatus):<b> @item.TaskStatus</b>
             <br />
             UserId:<b>@item.EmailId</b>
             <br />
-            @Html.DisplayNameFor(u=> u.CategoryId):<b>@item.CategoryId</b>
+            @Html.DisplayNameFor(u => u.CategoryId):<b>@item.CategoryId</b>
+            @Html.ActionLink("Edit", "Edit", "Tasks", new { TaskId = item.TaskId, EmailId = item.EmailId}, new { @style = "margin-left:400px" }) |                                                  
+            @Html.ActionLink("Delete","Delete","Tasks",new { TaskId = item.TaskId, EmailId = item.EmailId },null)
         </div>
     }
 }

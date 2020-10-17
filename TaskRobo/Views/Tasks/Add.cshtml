@@ -8,6 +8,11 @@
 <div class="AddForm">
     @using (Html.BeginForm("Add", "Tasks", FormMethod.Post, new { @id = "FormTitle" }))
     {
+        @*<div class="form-group">
+            @Html.LabelFor(u => u.TaskId)
+            @Html.TextBoxFor(u => u.TaskId, new { @class = "form-control", @readonly = "readonly" })
+        </div>*@
+
         <div class="form-group">
             @Html.LabelFor(u => u.TaskTitle)
             @Html.TextBoxFor(u => u.TaskTitle, new { @class = "form-control" })
@@ -23,9 +28,10 @@
             @Html.TextBoxFor(u => u.TaskStatus, new { @class = "form-control" })
         </div>
 
-        @Html.HiddenFor(u=> u.CategoryId)
-        @Html.HiddenFor(u=> u.EmailId)
-        
+        @Html.HiddenFor(u=> u.TaskId)
+        @Html.HiddenFor(u => u.CategoryId)
+        @Html.HiddenFor(u => u.EmailId)
+
         <button type="submit" class="btn btn-primary">Add Title</button>
     }
 </div>

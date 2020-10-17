@@ -1,3 +1,4 @@
+using FormFactory.Attributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace TaskRobo.Models
@@ -6,7 +7,8 @@ namespace TaskRobo.Models
     {
         [Key]
         public string EmailId { get; set; }
-        [Required]
+     
+        [Password]
         public string Password { get; set; }
     }
 }

@@ -59,7 +59,12 @@ namespace TaskRobo.Controllers
         [HttpGet]
         public ActionResult Login ()
         {
+            if(Session["User"]== null)
             return View();
+
+            AppUser UserInfo = new AppUser();
+            UserInfo = (AppUser)Session["User"];
+            return RedirectToAction("Index", "Categories",UserInfo);           
         }
 
         [HttpPost]
@@ -90,9 +95,12 @@ namespace TaskRobo.Controllers
 
             ViewBag.Invalid = "Email Id and password does not match";
             return View();
-
         }
-
+        public ActionResult Logout()
+        {
+            Session["User"] = null;
+            return View("Login");
+        }
         public bool DoesUserExist(AppUser appUser)
         {
             IList<AppUser> appuserList = contextobj.AppUsers.ToList();
